@@ -46,6 +46,12 @@ const MIME_TYPES = {
   '.opus': 'audio/ogg',
   '.vtt':  'text/vtt',
   '.srt':  'text/plain; charset=utf-8',
+  '.avif': 'image/avif',
+  '.bmp':  'image/bmp',
+  '.md':   'text/markdown; charset=utf-8',
+  '.csv':  'text/csv; charset=utf-8',
+  '.log':  'text/plain; charset=utf-8',
+  '.xml':  'application/xml',
 };
 
 const extensions = [
