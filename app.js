@@ -9,7 +9,7 @@ const { values, positionals } = parseArgs({
   options: {
     port: { type: 'string', short: 'p' },
     dir:  { type: 'string', short: 'd' },
-    host: { type: 'string', default: '127.0.0.1' },
+    host: { type: 'string', short: 'h', default: '127.0.0.1' },
   },
 });
 
@@ -212,7 +212,7 @@ async function main() {
     console.log('--- config ---');
     console.log(` PUBLIC_DIR=${PUBLIC_DIR}`);
     console.log(` RES_DIR=${RES_DIR}`);
-    console.log(` URL=http://localhost:${PORT}`);
+    console.log(` URL=http://${HOST}:${PORT}`);
     console.log(` RES_LEN=${RESOURCES.length}`);
     console.log('Server running ...\n--- requests ---');
   });
