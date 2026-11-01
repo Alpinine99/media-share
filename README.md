@@ -26,7 +26,7 @@ A tiny, dependency-free Node.js server that turns any folder into a browsable me
 ## Quick start
 
 ```bash
-git clone <your-repo-url> media-share
+git clone https://github.com/Alpinine99/media-share.git media-share
 cd media-share
 
 # serve a folder
