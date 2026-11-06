@@ -111,9 +111,16 @@ async function getFileList(dir = RES_DIR) {
   }
 }
 
-function resolveInside(base, rel) {
+async function resolveInside(base, rel) {
   const full = path.join(base, rel);
-  return full.startsWith(base + path.sep) ? full : null;
+  if (!full.startsWith(base + path.sep)) return null;
+  try {
+    // follow symlinks, then make sure the real file is still inside the real base folder
+    const [real, realBase] = await Promise.all([fs.realpath(full), fs.realpath(base)]);
+    return real.startsWith(realBase + path.sep) ? real : null;
+  } catch {
+    return full; // does not exist: let the stat below return 404
+  }
 }
 
 async function service(req, resp) {
@@ -145,7 +152,7 @@ async function service(req, resp) {
     urlPath = urlPath.slice('/res'.length); // "/res/a/b.mp4" -> "/a/b.mp4"
   }
 
-  const file = resolveInside(base, urlPath);
+  const file = await resolveInside(base, urlPath);
   if (!file) return send(403, 'Forbidden');
 
   let stats;
